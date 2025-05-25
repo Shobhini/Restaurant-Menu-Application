@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <!-- font awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- connect style.css -->
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Menu - Santu's Kitchen</title>
+</head>
+<body>
+    <!-- header sec begin -->
+    <div id="header">
+        <nav id="navbar">
+            <h1>Santu's Kitchen</h1>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="">Chef</a></li>
+                <li><a href="">About</a></li>
+                <li><a href="">Contact</a></li>
+            </ul>
+            <div id="phone">
+                <a href="tel: +2652298793">+2652298793</a>
+            </div>
+        </nav>
+        <div id="mobile_menu">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="">Chef</a></li>
+                <li><a href="">About</a></li>
+                <li><a href="">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- menu section -->
+    <div id="menu_section">
+        <div class="search_container">
+            <input type="text" id="menu_search" placeholder="Search our menu...">
+            <button type="submit"><i class="fa fa-search"></i></button>
+        </div>
+        <div class="menu_categories">
+            <ul>
+                <li class="active"><a href="#all">All</a></li>
+                <li><a href="#starters">Starters</a></li>
+                <li><a href="#mains">Mains</a></li>
+                <li><a href="#desserts">Desserts</a></li>
+                <li><a href="#beverages">Beverages</a></li>
+            </ul>
+        </div>
+        <div class="menu_items" id="all">
+            <!-- Menu items will go here -->
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
