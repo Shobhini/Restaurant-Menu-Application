@@ -2,8 +2,8 @@
 const menuItems = [
   { id: 1, title: "Bruschetta", category: "starters", price: "$5", description: "Toasted bread topped with tomatoes, garlic, and basil", img: "https://images.unsplash.com/photo-1572695157366-5e585ab2b69f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8YnJ1c2NoZXR0YXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60" },
   { id: 2, title: "Margherita Pizza", category: "mains", price: "$12", description: "Classic pizza with tomato sauce, mozzarella, and basil", img: "https://images.unsplash.com/photo-1604068549290-dea0e4a305ca?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8bWFyZ2hlcml0YSUyMHBpenphfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60" },
-  { id: 3, title: "Pasta Primavera", category: "mains", price: "$14", description: "Pasta with fresh spring vegetables in a light cream sauce", img: "https://plus.unsplash.com/premium_photo-1664206963965-f2f884b7e83f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cGFzdGElMjBwcmltYXZlcmF8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60" },
-  { id: 4, title: "Caprese Salad", category: "starters", price: "$7", description: "Fresh mozzarella, tomatoes, and basil drizzled with balsamic glaze", img: "https://images.unsplash.com/photo-1608685181600-8abb11eb0b9c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Y2FwcmVzZSUyMHNhbGFkfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60" },
+  { id: 3, title: "Pasta Primavera", category: "beverages", price: "$14", description: "Pasta with fresh spring vegetables in a light cream sauce", img: "https://media.istockphoto.com/id/170428990/photo/iced-mocha.webp?b=1&s=170667a&w=0&k=20&c=ItUVpbetBvrKaKcJySbepwehwa2JIJjSOqzHulpvJY0=" },
+  { id: 4, title: "Caprese Salad", category: "starters", price: "$7", description: "Fresh mozzarella, tomatoes, and basil drizzled with balsamic glaze", img:  "https://images.unsplash.com/photo-1604068549290-dea0e4a305ca?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8bWFyZ2hlcml0YSUyMHBpenphfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60" },
   { id: 5, title: "Chocolate Lava Cake", category: "desserts", price: "$8", description: "Warm chocolate cake with a gooey molten chocolate center, served with vanilla ice cream" , img: "https://media.istockphoto.com/id/544716244/photo/warm-chocolate-lava-cake-with-molten-center-and-red-currants.webp?b=1&s=170667a&w=0&k=20&c=6NPIcP8XUG4WwbJU-qfLOEP07aU79doAIsqZ8wic478="},
   { id: 6, title: "Apple Pie", category: "desserts", price: "$6", description: "Classic apple pie with a flaky crust, served with whipped cream", img: "https://plus.unsplash.com/premium_photo-1666353535417-c86616951727?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8YXBwbGUlMjBwaWV8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60"},
   { id: 7, title: "Vegan Burger", category: "mains", price: "$10", description: "Plant-based burger served with fries", img: "https://plus.unsplash.com/premium_photo-1664648063589-76b97669bc29?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8dmVnYW4lMjBidXJnZXJ8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60" },
@@ -49,18 +49,25 @@ function displayMenuItems(category = 'all') {
 // Function to handle search
 function handleSearch() {
   const searchInput = document.getElementById('menu_search');
-  const searchTerm = searchInput.value.toLowerCase();
+  const searchTerm = searchInput.value.toLowerCase().trim();
   
   const menuContainer = document.querySelector('.menu_items');
+  
+  // If search term is empty, show all items
+  if (!searchTerm) {
+    displayMenuItems();
+    return;
+  }
   
   // Filter items based on search term
   const filteredItems = menuItems.filter(item => 
     item.title.toLowerCase().includes(searchTerm) || 
-    item.description.toLowerCase().includes(searchTerm)
+    item.description.toLowerCase().includes(searchTerm) ||
+    item.category.toLowerCase().includes(searchTerm)
   );
   
   // Generate HTML for filtered items
-  const menuHTML = filteredItems.map(item => {
+  const menuHTML = filteredItems.length > 0 ? filteredItems.map(item => {
     return `<div class="menu-item">
       <div class="card">
         <img src="${item.img}" class="card-img-top" alt="${item.title}">
@@ -72,7 +79,7 @@ function handleSearch() {
         </div>
       </div>
     </div>`;
-  }).join('');
+  }).join('') : '<div class="no-results">No items found matching your search.</div>';
   
   // Update the menu container
   menuContainer.innerHTML = menuHTML;
@@ -103,15 +110,11 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
   
+  // Add event listener to search input for real-time search
+  const searchInput = document.getElementById('menu_search');
+  searchInput.addEventListener('input', handleSearch);
+  
   // Add event listener to search button
   const searchButton = document.querySelector('.search_container button');
   searchButton.addEventListener('click', handleSearch);
-  
-  // Add event listener for Enter key in search input
-  const searchInput = document.getElementById('menu_search');
-  searchInput.addEventListener('keyup', function(e) {
-    if (e.key === 'Enter') {
-      handleSearch();
-    }
-  });
 });
