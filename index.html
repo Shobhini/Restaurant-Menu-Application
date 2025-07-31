@@ -101,15 +101,14 @@
         <!-- footer sec begin -->
         <div id="footer">
             <div id="footer_content">
-                <p>&copy; 2023 Santu's Kitchen. All rights reserved.</p>
+                <p style="text-align: center; font-size: 16px; color: aliceblue;">
+                © <span id="year"></span> Santu's Kitchen. All rights reserved.</p>
+                <!-- <p>Follow us on social media:</p> -->
             </div>
         </div>
-        <!-- footer sec end -->
-
-
-
-
-
-
+            <!-- footer sec end -->
+        <script>
+            document.getElementById("year").textContent = new Date().getFullYear();
+        </script>
     </body>
 </html>
